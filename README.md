@@ -212,10 +212,10 @@ _Список использованных при реализации стру�
 
 [Статья на habr](https://habr.com/ru/post/144736/)
 
+[neerc.imfo](https://neerc.ifmo.ru/wiki/index.php?title=Rope)
+
 Англоязычные источники:
 
 [Wikipedia](https://en.wikipedia.org/wiki/Rope_(data_structure))
 
 [Статья на geeksforgeeks](https://www.geeksforgeeks.org/ropes-data-structure-fast-string-concatenation/)
-
-[Статья на fluentcpp](https://www.fluentcpp.com/2017/12/19/build-strings-from-plain-string-up-to-boost-karma/)

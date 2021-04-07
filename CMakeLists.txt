@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15 FATAL_ERROR)
 
 # Определите название вашего проекта (должно совпадать с названием репозитория).
 # Примечание: замените символ '-' на '_'.
-project(semester_work_template CXX)
+project(semester_work_rope)
 
 # === Определение стандарта C++ для всего проекта ===
 
@@ -35,7 +35,7 @@ target_compile_definitions(project_paths INTERFACE
 
 add_library(${PROJECT_NAME} STATIC
         src/data_structure.cpp
-        include/data_structure.hpp)
+        include/data_structure.hpp src/rope_string.cpp include/rope_string.hpp src/rope_string.cpp)
 
 # включить предупреждения компилятора для библиотеки (линковка)
 target_link_libraries(${PROJECT_NAME} PRIVATE project_warnings)
