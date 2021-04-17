@@ -2,25 +2,46 @@
 
 // Заголовочный файл с объявлением структуры данных
 
+#include <string>
+#include <list>
+
+using std::string;
+
 namespace itis {
-  // Структура веревочной строки
+
   struct Node {
+    ~Node(void);
+    void print_tree(std::ostream&, unsigned int);
+
+    const char* fragment;
+    Node *left, *right;
+    int weight;
+  };
+
+  struct Rope {
    public:
-    Node *left, *right, *parent;
-    char *str;
-    int lCount;
+    Rope(const string&);
+    ~Rope(void);
 
-    // Tip 2: На начальном этапе разработки структуры данных можете определения методов задавать в
-    // заголовочном файле, как только работа будет завершена, можно будет оставить здесь только объявления.
+    typedef string::value_type CharT;
 
-    // Вывод строки в консоль
-    void print(Node *node);
+    CharT at(unsigned int);
+    void insert(unsigned int, const char*);
+    void insert(unsigned int, const string&);
+    unsigned int length(void) const;
 
-    // Объединение двух строк
-    void concatenate(Node *n1, Node *n2, Node *n3, int l);
+    void print_tree(std::ostream&);
 
-    // Разделение строки по некоторому индексу
-    Node split(Node *n1, int index);
+    void copy(char*, unsigned int) const;
+    void consolidate(void);
+
+    void update_weights(Node*) const;
+    unsigned int internal_copy(Node*, char*, unsigned int) const;
+    unsigned int weight_sum(Node*) const;
+
+    Node* root;
+
+    std::list<const char*> to_delete;
   };
 
 }  // namespace itis
