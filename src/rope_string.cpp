@@ -30,6 +30,8 @@ namespace itis {
       delete[] * it;
   }
 
+  Node::Node(void) : fragment(nullptr), left(nullptr), right(nullptr) {}
+
   Node::~Node(void) {
     if (left)
       delete left;
@@ -59,11 +61,8 @@ namespace itis {
       throw "Shouldn't happen";
   }
 
-  void Rope::insert(unsigned int ix, const string& s) {
-    insert(ix, s.c_str());
-  }
-
-  void Rope::insert(unsigned int ix, const char* s) {
+  void Rope::insert(unsigned int ix, const string& str) {
+    const char *s = str.c_str();
     unsigned int new_cont_length = std::strlen(s);
     char* new_s = new char[new_cont_length];
     std::strncpy(new_s, s, new_cont_length);
@@ -130,27 +129,6 @@ namespace itis {
 
   unsigned int Rope::length(void) const {
     return root->weight;
-  }
-
-  void Rope::consolidate(void) {
-    char* new_contiguous_string = new char[length()];
-    unsigned int original_length = length();
-    copy(new_contiguous_string, length());
-
-    // Free memory.
-    delete root;
-
-    std::for_each(to_delete.begin(), to_delete.end(), [](const char* p) { delete[] p; });
-    to_delete.clear();
-
-    // New tree
-    Node *root = new Node, *left = new Node;
-
-    root->left = left;
-    left->weight = root->weight = original_length;
-    left->fragment = new_contiguous_string;
-
-    to_delete.push_back(new_contiguous_string);
   }
 
   void Rope::copy(char* buffer, unsigned int length) const {
