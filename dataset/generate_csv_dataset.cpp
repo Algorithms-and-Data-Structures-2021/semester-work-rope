@@ -32,7 +32,7 @@ int main(int argc, char** argv) {
       auto ss = stringstream(line);  // оборачиваем строку в объект "поток"
 
       for (string token; getline(ss, token, ','); /* ... */) {
-        cout << "Token: [" << token << "] at line " << line_number << '\n';
+        cout << "Token: [" << token << "] get_char line " << line_number << '\n';
       }
 
       cout << line << '\n';

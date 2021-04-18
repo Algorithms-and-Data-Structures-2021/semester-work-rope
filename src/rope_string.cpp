@@ -14,11 +14,13 @@ namespace itis {
     root->fragment = nullptr;
     root->left = root->right = nullptr;
     root->weight = s.length();
-    ;
+    root->height = 0;
 
     root->left = new Node;
     root->left->fragment = permanent_buffer;
+    root->left->height = 1;
     root->left->left = root->left->right = nullptr;
+    root->left->left->height = root->left->right->height = 2;
     root->left->weight = s.length();
   }
 
@@ -40,7 +42,7 @@ namespace itis {
     delete fragment;
   }
 
-  Rope::CharT Rope::at(unsigned int ix)  // zero-based index
+  Rope::CharT Rope::get_char(unsigned int ix)  // zero-based index
   {
     unsigned int current_ix = ix + 1;  // We deal with length values, 1-based index
     Node* current = root->left;        // root has only a left child
@@ -62,7 +64,7 @@ namespace itis {
   }
 
   void Rope::insert(unsigned int ix, const string& str) {
-    const char *s = str.c_str();
+    const char* s = str.c_str();
     unsigned int new_cont_length = std::strlen(s);
     char* new_s = new char[new_cont_length];
     std::strncpy(new_s, s, new_cont_length);
@@ -78,12 +80,15 @@ namespace itis {
       new_cont->weight = new_cont_length;
 
       new_root->left = root;
+      new_root->height = 0;
       root->right = new_cont;
+      root->right->height = 1;
 
       new_root->weight = new_cont->weight + root->weight;
 
       root = new_root;
 
+      balance(new_cont);
       // No weights update necessary
     } else if (ix < root->weight) {
       unsigned int current_ix = ix + 1;
@@ -121,10 +126,36 @@ namespace itis {
       current->left = new_left;
       current->right = new_right;
       update_weights(current);
-
+      //balance(current);
       // no weights update necessary.
     } else
       throw 42;
+  }
+
+  void Rope::print_tree(std::ostream& out)
+  {
+    out << root->weight << " characters in rope.\n";
+    root->left->print_tree(out,0);
+
+  }
+
+  void Node::print_tree(std::ostream& out,unsigned int level)
+  {
+    if ( ! this )
+      return;
+
+    for ( unsigned int i = 0; i < level; i++ )
+      out << "|   ";
+
+    if ( left )
+      out << "|-- " << string(fragment ? fragment : "<node>" ,fragment ? weight : 6) << " (" << weight << ")\n";
+    else
+      out << "|__ " << string(fragment ? fragment : "<node>",fragment ? weight : 6) << " (" << weight << ")\n";
+
+    right->print_tree(out,level+1);
+
+    left->print_tree(out,level);
+
   }
 
   unsigned int Rope::length(void) const {
@@ -136,29 +167,39 @@ namespace itis {
     buffer[length - 1] = '\0';
   }
 
-  void Rope::print_tree(std::ostream& out) {
-    out << root->weight << " characters in rope.\n";
-    root->left->print_tree(out, 0);
+  Node* Rope::rotate_right(Node* node1)  // правый поворот вокруг p
+  {
+    Node* node2 = node1->left;
+    node1->left = node2->right;
+    node2->right = node1;
+    fix_height(node1);
+    fix_height(node2);
+    return node2;
   }
 
-  void Node::print_tree(std::ostream& out, unsigned int level) {
-    if (!this)
-      return;
+  Node* Rope::rotate_left(Node* node1)  // левый поворот вокруг q
+  {
+    Node* node2 = node1->right;
+    node1->right = node2->left;
+    node2->left = node1;
+    fix_height(node1);
+    fix_height(node2);
+    return node2;
+  }
 
-    for (unsigned int i = 0; i < level; i++)
-      //out << "│   ";
-      out << "|   ";
-
-    if (left)
-      //out << "├── " << string(fragment ? fragment : "<node>", fragment ? weight : 6) << " (" << weight << ")\n";
-      out << "|-- " << string(fragment ? fragment : "<node>", fragment ? weight : 6) << " (" << weight << ")\n";
-    else
-      //out << "└── " << string(fragment ? fragment : "<node>", fragment ? weight : 6) << " (" << weight << ")\n";
-      out << "|__ " << string(fragment ? fragment : "<node>", fragment ? weight : 6) << " (" << weight << ")\n";
-
-    right->print_tree(out, level + 1);
-
-    left->print_tree(out, level);
+  Node* Rope::balance(Node* node)  // балансировка узла p
+  {
+    if (bfactor(node) == 2) {
+      if (bfactor(node->right) < 0)
+        node->right = rotate_right(node->right);
+      return rotate_left(node);
+    }
+    if (bfactor(node) == -2) {
+      if (bfactor(node->left) > 0)
+        node->left = rotate_left(node->left);
+      return rotate_right(node);
+    }
+    return node;  // балансировка не нужна
   }
 
   void Rope::update_weights(Node* n) const {
@@ -185,6 +226,20 @@ namespace itis {
     }
   }
 
+  unsigned char height(Node* node) {
+    return node ? node->height : 0;
+  }
+
+  int bfactor(Node* node) {
+    return height(node->right) - height(node->left);
+  }
+
+  void fix_height(Node* node) {
+    unsigned char hl = height(node->left);
+    unsigned char hr = height(node->right);
+    node->height = (hl > hr ? hl : hr) + 1;
+  }
+
   unsigned int Rope::internal_copy(Node* n, char* buffer, unsigned int length) const {
     if (length == 0 || !n)
       return 0;
@@ -201,4 +256,3 @@ namespace itis {
     }
   }
 }  // namespace itis
-   // namespace itis
