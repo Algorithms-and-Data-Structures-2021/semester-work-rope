@@ -212,7 +212,7 @@ _Список использованных при реализации стру�
 
 [Статья на habr](https://habr.com/ru/post/144736/)
 
-[neerc.imfo](https://neerc.ifmo.ru/wiki/index.php?title=Rope)
+[Реализация на github](https://github.com/sayan9112/rope/blob/master/rope.cpp)
 
 Англоязычные источники:
 
