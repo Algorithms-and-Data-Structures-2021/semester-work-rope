@@ -3,60 +3,50 @@
 // Заголовочный файл с объявлением структуры данных
 
 #include <string>
-#include <list>
+#include <stack>
 
 using std::string;
 
 namespace itis {
 
   struct Node {
-    //деструктор вершины
+    char key;
+    long long size; // количество узлов ниже (включая себя)
+    Node* left;
+    Node* right;
+    Node* parent;
+    Node(char key, long long size, Node* left, Node* right, Node* parent);
     ~Node(void);
-    //конструктор вершины
-    Node(void);
-
-    void print_tree(std::ostream&, unsigned int);
-
-    const char* fragment;
-    Node *left, *right;
-    int weight;
-    unsigned char height;
   };
 
-  unsigned char height(Node* node);
-  int bfactor(Node* node);
-  void fix_height(Node* node);
-
   struct Rope {
+    std::string s;
+    Node* root;
+
    public:
-    //конструктор rope
-    Rope(const string&);
-    //деструктор rope
+    Rope(const std::string& s);
+
     ~Rope(void);
 
-    void print_tree(std::ostream&);
+    void update(Node* v);
 
-    typedef string::value_type CharT;
-    //вывод строки
-    CharT get_char(unsigned int);
-    //добавление строки
-    void insert(unsigned int, const string&);
-    unsigned int length(void) const;
+    void small_rotation(Node* v);
 
-    //копирование часть строки из rope в переменную
-    void copy(char*, unsigned int) const;
+    void big_rotation(Node* v);
 
-    Node* rotate_right(Node* node);
-    Node* rotate_left(Node* node);
-    Node* balance(Node* node);
+    void splay(Node*& root, Node* v);
 
-    void update_weights(Node*) const;
-    unsigned int internal_copy(Node*, char*, unsigned int) const;
-    unsigned int weight_sum(Node*) const;
+    Node* find(Node*& root, int leftNum);
 
-    Node* root;
-    //вектор, хранящий ссылки на строки для дальнейшего удаления, чтобы не было утечки памяти
-    std::list<const char*> to_delete;
+    void split(Node* root, int key, Node*& left, Node*& right);
+
+    Node* merge(Node* left, Node* right);
+
+    void insert(Node*& root, int k, Node*& subString);
+
+    std::string traversal_in_order(Node* root);
+
+    std::string result();
   };
 
 }  // namespace itis
