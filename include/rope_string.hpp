@@ -16,6 +16,7 @@ namespace itis {
     Node* right;
     Node* parent;
     Node(char key, long long size, Node* left, Node* right, Node* parent);
+    ~Node(void);
   };
 
   struct Rope {
@@ -23,30 +24,40 @@ namespace itis {
     Node* root;
 
    public:
+    //Преобразует строку в структуру Rope
     Rope(const std::string& s);
 
+    //Удаление структуры Rope
     ~Rope(void);
 
-    void delete_substr(Node *root, int beginIndex, int endIndex);
-
+    //Вспомогательный метод, обновляет размер, задаёт родительский узел для левого и правого узла
     void update(Node* v);
 
+    //Используется для балансировки дерева
     void small_rotation(Node* v);
 
+    //Используется для балансировки дерева
     void big_rotation(Node* v);
 
+    //
     void splay(Node*& root, Node* v);
 
+    //
     Node* find(Node*& root, int leftNum);
 
+    //
     void split(Node* root, int key, Node*& left, Node*& right);
 
+    //
     Node* merge(Node* left, Node* right);
 
+    //
     void insert(Node*& root, int k, Node*& subString);
 
+    //
     std::string traversal_in_order(Node* root);
 
+    //
     std::string result();
   };
 
