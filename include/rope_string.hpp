@@ -25,6 +25,8 @@ namespace itis {
    public:
     Rope(const std::string& s);
 
+    ~Rope(void);
+
     void delete_substr(Node *root, int beginIndex, int endIndex);
 
     void update(Node* v);

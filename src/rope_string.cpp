@@ -12,6 +12,8 @@ namespace itis {
     }
   }
 
+  Rope::~Rope(void) = default;
+
   void Rope::update(Node* v) {
     if (v == nullptr)
       return;
