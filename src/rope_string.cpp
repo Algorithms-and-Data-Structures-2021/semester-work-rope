@@ -5,11 +5,9 @@ namespace itis {
       : key(key), size(size), left(left), right(right), parent(parent) {}
 
   Rope::Rope(const std::string& s) : s(s) {
-    root = NULL;
-
-    //Создаёт узлы, которые хранят в себе по одному символу строки, затем использует функцию merge
+    root = nullptr;
     for (int i = 0; i < s.length(); i++) {
-      Node* next = new Node(s[i], 1, NULL, NULL, NULL);
+      Node* next = new Node(s[i], 1, nullptr, nullptr, nullptr);
       root = merge(root, next);
     }
   }
@@ -29,24 +27,20 @@ namespace itis {
   }
 
   void Rope::update(Node* v) {
-    if (v == NULL)
+    if (v == nullptr)
       return;
-
-    //Обновляет размер узла
-    v->size = 1 + (v->left != NULL ? v->left->size : 0) + (v->right != NULL ? v->right->size : 0);
-
-    //Если у данного узла есть "дочерний" узел, то задаёт зависимому узлу родителя
-    if (v->left != NULL) {
+    v->size = 1 + (v->left != nullptr ? v->left->size : 0) + (v->right != nullptr ? v->right->size : 0);
+    if (v->left != nullptr) {
       v->left->parent = v;
     }
-    if (v->right != NULL) {
+    if (v->right != nullptr) {
       v->right->parent = v;
     }
   }
 
   void Rope::small_rotation(Node* v) {
     Node* parent = v->parent;
-    if (parent == NULL) {
+    if (parent == nullptr) {
       return;
     }
     Node* grandparent = v->parent->parent;
@@ -62,7 +56,7 @@ namespace itis {
     update(parent);
     update(v);
     v->parent = grandparent;
-    if (grandparent != NULL) {
+    if (grandparent != nullptr) {
       if (grandparent->left == parent) {
         grandparent->left = v;
       } else {
@@ -84,10 +78,10 @@ namespace itis {
     }
   }
   void Rope::splay(Node*& root, Node* v) {
-    if (v == NULL)
+    if (v == nullptr)
       return;
-    while (v->parent != NULL) {
-      if (v->parent->parent == NULL) {
+    while (v->parent != nullptr) {
+      if (v->parent->parent == nullptr) {
         small_rotation(v);
         break;
       }
@@ -100,8 +94,8 @@ namespace itis {
   {
     Node* v = root;
 
-    while (v != NULL) {
-      long long s = (v->left != NULL) ? v->left->size : 0;
+    while (v != nullptr) {
+      long long s = (v->left != nullptr) ? v->left->size : 0;
       if (leftNum == (s + 1)) {
         break;
       }
@@ -121,14 +115,14 @@ namespace itis {
   {
     right = find(root, key);
     splay(root, right);
-    if (right == NULL) {
+    if (right == nullptr) {
       left = root;
       return;
     }
     left = right->left;
-    right->left = NULL;
-    if (left != NULL) {
-      left->parent = NULL;
+    right->left = nullptr;
+    if (left != nullptr) {
+      left->parent = nullptr;
     }
     update(left);
     update(right);
@@ -136,12 +130,12 @@ namespace itis {
 
   Node* Rope::merge(Node* left, Node* right)
   {
-    if (left == NULL)
+    if (left == nullptr)
       return right;
-    if (right == NULL)
+    if (right == nullptr)
       return left;
     Node* min_right = right;
-    while (min_right->left != NULL) {
+    while (min_right->left != nullptr) {
       min_right = min_right->left;
     }
     splay(right, min_right);
@@ -152,8 +146,8 @@ namespace itis {
 
   void Rope::insert(Node*& root, int k, Node*& subString)
   {
-    Node* left = NULL;
-    Node* right = NULL;
+    Node* left = nullptr;
+    Node* right = nullptr;
     split(root, k, left, right);
     root = merge(merge(left, subString), right);
   }
@@ -161,13 +155,13 @@ namespace itis {
   std::string Rope::traversal_in_order(Node* root)
   {
     std::string printS = "";
-    if (root == NULL) {
+    if (root == nullptr) {
       return printS;
     }
     std::stack<Node*> S;
     Node* p = root;
 
-    while (p != NULL) {
+    while (p != nullptr) {
       S.push(p);
       p = p->left;
     }
@@ -177,7 +171,7 @@ namespace itis {
       printS.push_back(p->key);
       S.pop();
       p = p->right;
-      while (p != NULL) {
+      while (p != nullptr) {
         S.push(p);
         p = p->left;
       }
