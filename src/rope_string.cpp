@@ -6,6 +6,8 @@ namespace itis {
 
   Rope::Rope(const std::string& s) : s(s) {
     root = NULL;
+
+    //Создаёт узлы, которые хранят в себе по одному символу строки, затем использует функцию merge
     for (int i = 0; i < s.length(); i++) {
       Node* next = new Node(s[i], 1, NULL, NULL, NULL);
       root = merge(root, next);
@@ -29,7 +31,11 @@ namespace itis {
   void Rope::update(Node* v) {
     if (v == NULL)
       return;
+
+    //Обновляет размер узла
     v->size = 1 + (v->left != NULL ? v->left->size : 0) + (v->right != NULL ? v->right->size : 0);
+
+    //Если у данного узла есть "дочерний" узел, то задаёт зависимому узлу родителя
     if (v->left != NULL) {
       v->left->parent = v;
     }
