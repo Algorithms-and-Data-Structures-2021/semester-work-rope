@@ -16,7 +16,6 @@ namespace itis {
     Node* right;
     Node* parent;
     Node(char key, long long size, Node* left, Node* right, Node* parent);
-    ~Node(void);
   };
 
   struct Rope {

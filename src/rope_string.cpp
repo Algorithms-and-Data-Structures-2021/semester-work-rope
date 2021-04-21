@@ -140,13 +140,6 @@ namespace itis {
     root = merge(merge(left, subString), right);
   }
 
-  void Rope::delete_substr(Node *root, int beginIndex, int endIndex) {
-    Node* left = nullptr;
-    Node* right = nullptr;
-    split(root, beginIndex, left, right);
-    split(root, endIndex, left, right);
-  }
-
   std::string Rope::traversal_in_order(Node* root)
   {
     std::string printS = "";
