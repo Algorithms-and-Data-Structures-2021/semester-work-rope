@@ -16,7 +16,6 @@ namespace itis {
     Node* right;
     Node* parent;
     Node(char key, long long size, Node* left, Node* right, Node* parent);
-    ~Node(void);
   };
 
   struct Rope {
@@ -26,7 +25,7 @@ namespace itis {
    public:
     Rope(const std::string& s);
 
-    ~Rope(void);
+    void delete_substr(Node *root, int beginIndex, int endIndex);
 
     void update(Node* v);
 
