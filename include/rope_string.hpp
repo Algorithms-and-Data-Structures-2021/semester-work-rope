@@ -38,6 +38,9 @@ namespace itis {
     //Используется для балансировки дерева
     void big_rotation(Node* v);
 
+    //удаление подстроки
+    void delete_substr(Node*& root, int startIndex, int endIndex);
+
     //
     void splay(Node*& root, Node* v);
 

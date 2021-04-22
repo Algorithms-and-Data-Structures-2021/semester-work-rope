@@ -12,6 +12,7 @@ int main(){
   itis::Rope rope1(s1);
   rope.insert(rope.root, 11, rope1.root);
   std::cout << rope.result() << std::endl;
-
+  rope.delete_substr(rope.root, 11, 13);
+  std::cout << rope.result() << std::endl;
   return 0;
 }

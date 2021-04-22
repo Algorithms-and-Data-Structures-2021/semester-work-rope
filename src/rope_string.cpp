@@ -78,19 +78,25 @@ namespace itis {
     root = v;
   }
 
-  Node* Rope::find(Node*& root, int leftNum)
-  {
+  void Rope::delete_substr(Node*& root, int startIndex, int endIndex) {
+    Node* node1 = nullptr;
+    Node* node2 = nullptr;
+    Node* node3 = nullptr;
+    split(root, startIndex, node1, node2);
+    split(root, endIndex - startIndex, node2, node3);
+    merge(node1, root);
+  }
+
+  Node* Rope::find(Node*& root, int leftNum) {
     Node* v = root;
 
     while (v != nullptr) {
       long long s = (v->left != nullptr) ? v->left->size : 0;
       if (leftNum == (s + 1)) {
         break;
-      }
-      else if (leftNum < (s + 1)) {
+      } else if (leftNum < (s + 1)) {
         v = v->left;
-      }
-      else if (leftNum > (s + 1)) {
+      } else if (leftNum > (s + 1)) {
         v = v->right;
         leftNum = leftNum - s - 1;
       }
@@ -99,8 +105,7 @@ namespace itis {
     return v;
   }
 
-  void Rope::split(Node* root, int key, Node*& left, Node*& right)
-  {
+  void Rope::split(Node* root, int key, Node*& left, Node*& right) {
     right = find(root, key);
     splay(root, right);
     if (right == nullptr) {
@@ -116,8 +121,7 @@ namespace itis {
     update(right);
   }
 
-  Node* Rope::merge(Node* left, Node* right)
-  {
+  Node* Rope::merge(Node* left, Node* right) {
     if (left == nullptr)
       return right;
     if (right == nullptr)
@@ -132,16 +136,14 @@ namespace itis {
     return right;
   }
 
-  void Rope::insert(Node*& root, int k, Node*& subString)
-  {
+  void Rope::insert(Node*& root, int k, Node*& subString) {
     Node* left = nullptr;
     Node* right = nullptr;
     split(root, k, left, right);
     root = merge(merge(left, subString), right);
   }
 
-  std::string Rope::traversal_in_order(Node* root)
-  {
+  std::string Rope::traversal_in_order(Node* root) {
     std::string printS = "";
     if (root == nullptr) {
       return printS;
@@ -167,8 +169,7 @@ namespace itis {
     return printS;
   }
 
-  std::string Rope::result()
-  {
+  std::string Rope::result() {
     s = traversal_in_order(root);
     return s;
   }
