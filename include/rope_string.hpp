@@ -41,25 +41,25 @@ namespace itis {
     //удаление подстроки
     void delete_substr(Node*& root, int startIndex, int endIndex);
 
-    //
+    //использует для балансировки дерева, нод v становится root
     void splay(Node*& root, Node* v);
 
-    //
+    //поиск символа по индексу
     Node* find(Node*& root, int leftNum);
 
-    //
+    //разделение на 2 дерева по индексу
     void split(Node* root, int key, Node*& left, Node*& right);
 
-    //
+    //слияние 2 деревьев
     Node* merge(Node* left, Node* right);
 
-    //
+    //вставка строки по индексу
     void insert(Node*& root, int k, Node*& subString);
 
-    //
+    //обход вершин по порядку
     std::string traversal_in_order(Node* root);
 
-    //
+    //вывод строки
     std::string result();
   };
 
