@@ -12,8 +12,6 @@ namespace itis {
     }
   }
 
-  Rope::~Rope(void) = default;
-
   void Rope::update(Node* v) {
     if (v == nullptr)
       return;
@@ -85,6 +83,7 @@ namespace itis {
     split(root, startIndex, node1, node2);
     split(root, endIndex - startIndex, node2, node3);
     merge(node1, root);
+    Rope::free_tree(node2);
   }
 
   Node* Rope::find(Node*& root, int leftNum) {
@@ -172,5 +171,13 @@ namespace itis {
   std::string Rope::result() {
     s = traversal_in_order(root);
     return s;
+  }
+
+  void Rope::free_tree(Node *root) {
+    if (root->left)
+      Rope::free_tree(root->left);
+    if (root->right)
+      Rope::free_tree(root->right);
+    delete root;
   }
 }  // namespace itis
