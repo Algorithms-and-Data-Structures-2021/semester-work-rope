@@ -12,10 +12,10 @@ static constexpr auto kProjectPath = string_view{PROJECT_DATASET_DIR};
 void time_for_merge(int x, int a) {
   const auto path = string(kProjectPath);
   ifstream fin;
-  string string1 = to_string(x);
-  string s = to_string(a);
+  string num_of_incoming_data = to_string(x);
+  string set_num = to_string(a);
   for (int i = 0; i < 10; i++) {
-    fin.open(path + "/insert_merge/" + string1 + "(" + s + ").txt");
+    fin.open(path + "/insert_merge/" + num_of_incoming_data + "(" + set_num + ").txt");
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
@@ -24,6 +24,7 @@ void time_for_merge(int x, int a) {
       Rope rope1(str);
       fin >> str;
       Rope rope2(str);
+
       const auto time_point_before = chrono::high_resolution_clock::now();
       rope1.merge(rope1.root, rope2.root);
       const auto time_point_after = chrono::high_resolution_clock::now();
@@ -31,7 +32,7 @@ void time_for_merge(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << time_elapsed_ns << '\n';
+      cout << "time wasted to merge two strings in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -40,10 +41,10 @@ void time_for_merge(int x, int a) {
 void time_for_insert(int x, int a) {
   const auto path = string(kProjectPath);
   ifstream fin;
-  string string1 = to_string(x);
-  string s = to_string(a);
+  string num_of_incoming_data = to_string(x);
+  string set_num = to_string(a);
   for (int i = 0; i < 10; i++) {
-    fin.open(path + "/insert_merge/" + string1 + "(" + s + ").txt");
+    fin.open(path + "/insert_merge/" + num_of_incoming_data + "(" + set_num + ").txt");
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
@@ -53,6 +54,7 @@ void time_for_insert(int x, int a) {
       Rope rope1(str);
       fin >> str;
       Rope rope2(str);
+
       const auto time_point_before = chrono::high_resolution_clock::now();
       rope1.insert(rope1.root, c, rope2.root);
       const auto time_point_after = chrono::high_resolution_clock::now();
@@ -60,7 +62,7 @@ void time_for_insert(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << time_elapsed_ns << '\n';
+      cout << "time wasted to insert one string to second string in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -69,10 +71,10 @@ void time_for_insert(int x, int a) {
 void time_for_find(int x, int a) {
   const auto path = string(kProjectPath);
   ifstream fin;
-  string string1 = to_string(x);
-  string s = to_string(a);
+  string num_of_incoming_data = to_string(x);
+  string set_num = to_string(a);
   for (int i = 0; i < 10; i++) {
-    fin.open(path + "/find_split_delete/" + string1 + "(" + s + ").txt");
+    fin.open(path + "/find_split_delete/" + num_of_incoming_data + "(" + set_num + ").txt");
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
@@ -80,6 +82,7 @@ void time_for_find(int x, int a) {
       string str;
       fin >> str;
       Rope rope1(str);
+
       const auto time_point_before = chrono::high_resolution_clock::now();
       rope1.find(rope1.root, c);
       const auto time_point_after = chrono::high_resolution_clock::now();
@@ -87,7 +90,7 @@ void time_for_find(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << time_elapsed_ns << '\n';
+      cout << "time wasted to find symbol in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -96,10 +99,10 @@ void time_for_find(int x, int a) {
 void time_for_split(int x, int a) {
   const auto path = string(kProjectPath);
   ifstream fin;
-  string string1 = to_string(x);
-  string s = to_string(a);
+  string num_of_incoming_data = to_string(x);
+  string set_num = to_string(a);
   for (int i = 0; i < 10; i++) {
-    fin.open(path + "/find_split_delete/" + string1 + "(" + s + ").txt");
+    fin.open(path + "/find_split_delete/" + num_of_incoming_data + "(" + set_num + ").txt");
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
@@ -109,6 +112,7 @@ void time_for_split(int x, int a) {
       Rope rope1(str);
       Node *node1;
       Node *node2;
+
       const auto time_point_before = chrono::high_resolution_clock::now();
       rope1.split(rope1.root, c, node1, node2);
       const auto time_point_after = chrono::high_resolution_clock::now();
@@ -116,7 +120,7 @@ void time_for_split(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << time_elapsed_ns << '\n';
+      cout << "time wasted to split string in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -125,10 +129,10 @@ void time_for_split(int x, int a) {
 void time_for_delete(int x, int a) {
   const auto path = string(kProjectPath);
   ifstream fin;
-  string string1 = to_string(x);
-  string s = to_string(a);
+  string num_of_incoming_data = to_string(x);
+  string set_num = to_string(a);
   for (int i = 0; i < 10; i++) {
-    fin.open(path + "/find_split_delete/" + string1 + "(" + s + ").txt");
+    fin.open(path + "/find_split_delete/" + num_of_incoming_data + "(" + set_num + ").txt");
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
@@ -138,14 +142,16 @@ void time_for_delete(int x, int a) {
       string str;
       fin >> str;
       Rope rope1(str);
+
       const auto time_point_before = chrono::high_resolution_clock::now();
-      rope1.delete_substr(rope1.root, c, k);
+      rope1.free_tree(rope1.root);
       const auto time_point_after = chrono::high_resolution_clock::now();
 
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << time_elapsed_ns << '\n';
+      cout << "time to delete substring in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
+
     }
     fin.close();
   }
@@ -155,11 +161,11 @@ int main() {
   int arr[14] = {100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000, 2500000, 5000000};
   for (int i = 0; i < 14; i++) {
     for (int j = 1; j < 11; j++) {
-      /*time_for_insert(arr[i], j);
+      time_for_insert(arr[i], j);
       time_for_merge(arr[i], j);
       time_for_find(arr[i], j);
-      time_for_split(arr[i], j);*/
-      time_for_delete(arr[i],j);
+      time_for_split(arr[i], j);
+      time_for_delete(arr[i], j);
     }
   }
 

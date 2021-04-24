@@ -14,5 +14,7 @@ int main(){
   std::cout << rope.result() << std::endl;
   rope.delete_substr(rope.root, 11, 13);
   std::cout << rope.result() << std::endl;
+  rope1.free_tree(rope.root);
+  std::cout << rope.result();
   return 0;
 }

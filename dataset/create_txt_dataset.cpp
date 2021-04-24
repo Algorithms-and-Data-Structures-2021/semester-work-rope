@@ -9,9 +9,9 @@
 using namespace std;
 using namespace itis;
 
-void create_data_for_insert_merge(string str, int x) {
+void create_data_for_insert_merge(string path, int x) {
   ofstream fout;
-  fout.open(str);
+  fout.open(path);
 
   char a[26] = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd',
                 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'b', 'v', 'c', 'x', 'z'};
@@ -33,9 +33,9 @@ void create_data_for_insert_merge(string str, int x) {
     fout.close();
 }
 
-void create_data_for_split_delete_find(string str, int x) {
+void create_data_for_split_delete_find(string path, int x) {
   ofstream fout;
-  fout.open(str);
+  fout.open(path);
 
   char a[26] = {'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', 'a', 's', 'd',
                 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'b', 'v', 'c', 'x', 'z'};
