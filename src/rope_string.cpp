@@ -80,9 +80,10 @@ namespace itis {
     Node* node1 = nullptr;
     Node* node2 = nullptr;
     Node* node3 = nullptr;
+    Node* node4 = nullptr;
     split(root, startIndex, node1, node2);
-    split(root, endIndex - startIndex, node2, node3);
-    merge(node1, root);
+    split(node2, endIndex - startIndex, node3, node4);
+    root = merge(node1, node4);
     Rope::free_tree(node2);
   }
 
