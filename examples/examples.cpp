@@ -21,7 +21,7 @@ int main(){
   rope.insert(rope.root, 6, rope1.root);
   std::cout << rope.result() << std::endl;
   //удаление подстроки
-  rope.delete_substr(rope.root, 6, 10);
+  rope.delete_substr(rope.root, 6, 9);
   std::cout << rope.result() << std::endl;
 
   itis::Rope rope2("");
