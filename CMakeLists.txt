@@ -34,8 +34,7 @@ target_compile_definitions(project_paths INTERFACE
 # Это самое главное, что вы должны реализовать в рамках семестрового проекта.
 
 add_library(${PROJECT_NAME} STATIC
-        src/data_structure.cpp
-        include/data_structure.hpp src/rope_string.cpp include/rope_string.hpp src/rope_string.cpp)
+        src/rope_string.cpp include/rope_string.hpp)
 
 # включить предупреждения компилятора для библиотеки (линковка)
 target_link_libraries(${PROJECT_NAME} PRIVATE project_warnings)

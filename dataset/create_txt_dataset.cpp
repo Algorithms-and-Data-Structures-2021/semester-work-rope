@@ -9,6 +9,8 @@
 using namespace std;
 using namespace itis;
 
+static constexpr auto kDatasetPath = string_view{PROJECT_DATASET_DIR};
+
 void create_data_for_insert_merge(string path, int x) {
   ofstream fout;
   fout.open(path);
@@ -56,7 +58,7 @@ void create_data_for_split_delete_find(string path, int x) {
 }
 
 int main(){
-  string path = "dataset/data";
+  const auto path = string(kDatasetPath);  // конвертация string_view в string
   int a[14] = {100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000, 2500000, 5000000};
   ofstream fout;
   for (int j = 0; j < 14; ++j) {
