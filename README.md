@@ -2,10 +2,6 @@
 
 [![CMake](https://github.com/Algorithms-and-Data-Structures-2021/semester-work-rope/actions/workflows/cmake.yml/badge.svg)](https://github.com/Algorithms-and-Data-Structures-2021/semester-work-rope/actions/workflows/cmake.yml)
 
-**_Измените status badge сверху для отображения статуса сборки вашего проекта._**
-
-`Actions > CMake > ... > Create status badge`
-
 _Краткое описание семестрового проекта. Следует отразить информацию по следующим пунктам:_
 
 - _Какая структура данных реализуется?_
@@ -45,8 +41,8 @@ _Краткое описание семестрового проекта. Сле
 
 | Фамилия Имя   | Вклад (%) | Прозвище              |
 | :---          |   ---:    |  ---:                 |
-| Ризван |    50     |  garoriz              |
-| Амирхан   |    50     |  mier |
+| Гарипов Ризван |    50     |  garoriz              |
+| Вагавиев Амирхан   |    50     |  mier |
 
 
 **Девиз команды**
