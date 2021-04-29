@@ -32,7 +32,8 @@ void time_for_merge(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << "time wasted to merge two strings in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
+      cout << "time wasted to merge two strings in file " + num_of_incoming_data + "(" + set_num + ").txt "
+           << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -62,7 +63,9 @@ void time_for_insert(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << "time wasted to insert one string to second string in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
+      cout << "time wasted to insert one string to second string in file " + num_of_incoming_data + "(" + set_num
+                  + ").txt "
+           << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -90,7 +93,8 @@ void time_for_find(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << "time wasted to find symbol in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
+      cout << "time wasted to find symbol in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns
+           << '\n';
     }
     fin.close();
   }
@@ -120,7 +124,8 @@ void time_for_split(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << "time wasted to split string in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
+      cout << "time wasted to split string in file " + num_of_incoming_data + "(" + set_num + ").txt "
+           << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -136,9 +141,9 @@ void time_for_delete(int x, int a) {
     if (!fin.is_open()) {
       cout << "Error" << endl;
     } else {
-      int c = rand() % (x-2);
-      int k = rand() % (x-c-1);
-      k=k+c;
+      int c = rand() % (x - 2);
+      int k = rand() % (x - c - 1);
+      k = k + c;
       string str;
       fin >> str;
       Rope rope1(str);
@@ -150,8 +155,8 @@ void time_for_delete(int x, int a) {
       const auto time_diff = time_point_after - time_point_before;
       const long time_elapsed_ns = chrono::duration_cast<chrono::nanoseconds>(time_diff).count();
 
-      cout << "time to delete substring in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns << '\n';
-
+      cout << "time wasted to delete substring in file " + num_of_incoming_data + "(" + set_num + ").txt "
+           << time_elapsed_ns << '\n';
     }
     fin.close();
   }
@@ -159,16 +164,15 @@ void time_for_delete(int x, int a) {
 
 int main() {
   int arr[14] = {100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000, 2500000, 5000000};
-  for (int i = 0; i < 14; i++) {
+  for (int i = 7; i < 14; i++) {
     for (int j = 1; j < 11; j++) {
-      time_for_insert(arr[i], j);
-      time_for_merge(arr[i], j);
-      time_for_find(arr[i], j);
-      time_for_split(arr[i], j);
+      //time_for_insert(arr[i], j);
+      //time_for_merge(arr[i], j);
+      //time_for_find(arr[i], j);
+      //time_for_split(arr[i], j);
       time_for_delete(arr[i], j);
     }
   }
-
 
   return 0;
 }

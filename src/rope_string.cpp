@@ -86,6 +86,7 @@ namespace itis {
     split(node2, endIndex - startIndex + 1, node3, node4);
     root = merge(node1, node4);
     Rope::free_tree(node2);
+    Rope::free_tree(node3);
   }
 
   Node* Rope::find(Node*& root, int leftNum) {
@@ -175,11 +176,13 @@ namespace itis {
     return s;
   }
 
-  void Rope::free_tree(Node* root) {
-    if (root->left)
-      Rope::free_tree(root->left);
-    if (root->right)
-      Rope::free_tree(root->right);
-    delete root;
+  void Rope::free_tree(Node* node) {
+    if (node->left != nullptr) {
+      Rope::free_tree(node->left);
+    }
+    if (node->right != nullptr) {
+      Rope::free_tree(node->right);
+    }
+    delete node;
   }
 }  // namespace itis
