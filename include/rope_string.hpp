@@ -11,7 +11,7 @@ namespace itis {
 
   struct Node {
     char key;
-    long long size; // количество узлов ниже (включая себя)
+    long long size;  // количество узлов ниже (включая себя)
     Node* left;
     Node* right;
     Node* parent;
@@ -27,7 +27,7 @@ namespace itis {
     Rope(const std::string& s);
 
     //Удаление структуры Rope
-    void free_tree(Node *root);
+    void free_tree(Node* root);
 
     //Вспомогательный метод, обновляет размер, задаёт родительский узел для левого и правого узла
     void update(Node* v);

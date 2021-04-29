@@ -63,6 +63,7 @@ namespace itis {
       small_rotation(v);
     }
   }
+
   void Rope::splay(Node*& root, Node* v) {
     if (v == nullptr)
       return;
@@ -174,7 +175,7 @@ namespace itis {
     return s;
   }
 
-  void Rope::free_tree(Node *root) {
+  void Rope::free_tree(Node* root) {
     if (root->left)
       Rope::free_tree(root->left);
     if (root->right)
