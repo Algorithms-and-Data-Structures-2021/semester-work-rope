@@ -78,15 +78,12 @@ namespace itis {
   }
 
   void Rope::delete_substr(Node*& root, int startIndex, int endIndex) {
-    Node* node1 = nullptr;
-    Node* node2 = nullptr;
-    Node* node3 = nullptr;
-    Node* node4 = nullptr;
-    split(root, startIndex, node1, node2);
-    split(node2, endIndex - startIndex + 1, node3, node4);
-    root = merge(node1, node4);
-    Rope::free_tree(node2);
-    Rope::free_tree(node3);
+    Node *node1 = nullptr;
+    Node *node2 = nullptr;
+    split(root, startIndex, root, node1);
+    split(node1, endIndex - startIndex + 1, node1, node2);
+    root = merge(root, node2);
+    free_tree(node1);
   }
 
   Node* Rope::find(Node*& root, int leftNum) {
@@ -177,12 +174,10 @@ namespace itis {
   }
 
   void Rope::free_tree(Node* node) {
-    if (node->left != nullptr) {
+    if (node != nullptr) {
       Rope::free_tree(node->left);
-    }
-    if (node->right != nullptr) {
       Rope::free_tree(node->right);
+      delete node;
     }
-    delete node;
   }
 }  // namespace itis

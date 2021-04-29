@@ -2,7 +2,6 @@
 #include <chrono>
 #include <rope_string.hpp>
 #include <iostream>
-#include <random>
 
 using namespace std;
 using namespace itis;
@@ -34,6 +33,7 @@ void time_for_merge(int x, int a) {
 
       cout << "time wasted to merge two strings in file " + num_of_incoming_data + "(" + set_num + ").txt "
            << time_elapsed_ns << '\n';
+      rope1.free_tree(rope1.root);
     }
     fin.close();
   }
@@ -66,6 +66,7 @@ void time_for_insert(int x, int a) {
       cout << "time wasted to insert one string to second string in file " + num_of_incoming_data + "(" + set_num
                   + ").txt "
            << time_elapsed_ns << '\n';
+      rope1.free_tree(rope1.root);
     }
     fin.close();
   }
@@ -84,10 +85,10 @@ void time_for_find(int x, int a) {
       int c = rand() % x;
       string str;
       fin >> str;
-      Rope rope1(str);
+      Rope rope(str);
 
       const auto time_point_before = chrono::high_resolution_clock::now();
-      rope1.find(rope1.root, c);
+      rope.find(rope.root, c);
       const auto time_point_after = chrono::high_resolution_clock::now();
 
       const auto time_diff = time_point_after - time_point_before;
@@ -95,6 +96,7 @@ void time_for_find(int x, int a) {
 
       cout << "time wasted to find symbol in file " + num_of_incoming_data + "(" + set_num + ").txt " << time_elapsed_ns
            << '\n';
+      rope.free_tree(rope.root);
     }
     fin.close();
   }
@@ -113,12 +115,12 @@ void time_for_split(int x, int a) {
       int c = rand() % x;
       string str;
       fin >> str;
-      Rope rope1(str);
+      Rope rope(str);
       Node *node1;
       Node *node2;
 
       const auto time_point_before = chrono::high_resolution_clock::now();
-      rope1.split(rope1.root, c, node1, node2);
+      rope.split(rope.root, c, node1, node2);
       const auto time_point_after = chrono::high_resolution_clock::now();
 
       const auto time_diff = time_point_after - time_point_before;
@@ -126,6 +128,8 @@ void time_for_split(int x, int a) {
 
       cout << "time wasted to split string in file " + num_of_incoming_data + "(" + set_num + ").txt "
            << time_elapsed_ns << '\n';
+      rope.free_tree(node1);
+      rope.free_tree(node2);
     }
     fin.close();
   }
@@ -146,10 +150,10 @@ void time_for_delete(int x, int a) {
       k = k + c;
       string str;
       fin >> str;
-      Rope rope1(str);
+      Rope rope(str);
 
       const auto time_point_before = chrono::high_resolution_clock::now();
-      rope1.free_tree(rope1.root);
+      rope.delete_substr(rope.root, c, k);
       const auto time_point_after = chrono::high_resolution_clock::now();
 
       const auto time_diff = time_point_after - time_point_before;
@@ -157,6 +161,7 @@ void time_for_delete(int x, int a) {
 
       cout << "time wasted to delete substring in file " + num_of_incoming_data + "(" + set_num + ").txt "
            << time_elapsed_ns << '\n';
+      rope.free_tree(rope.root);
     }
     fin.close();
   }
@@ -164,7 +169,7 @@ void time_for_delete(int x, int a) {
 
 int main() {
   int arr[14] = {100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000, 2500000, 5000000};
-  for (int i = 0; i < 14; i++) {
+  for (int i = 10; i < 14; i++) {
     for (int j = 1; j < 11; j++) {
       time_for_insert(arr[i], j);
       time_for_merge(arr[i], j);

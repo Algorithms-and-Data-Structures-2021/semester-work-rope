@@ -27,7 +27,7 @@ namespace itis {
     Rope(const std::string& s);
 
     //Удаление структуры Rope
-    void free_tree(Node* root);
+    void free_tree(Node* node);
 
     //Вспомогательный метод, обновляет размер, задаёт родительский узел для левого и правого узла
     void update(Node* v);
